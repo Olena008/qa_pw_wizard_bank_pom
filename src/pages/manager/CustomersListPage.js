@@ -4,7 +4,7 @@ export class CustomersListPage {
   constructor(page) {
     this.page = page;
     this.tableRows = page.locator('tbody tr');
-    this.lastTableRow = page.locator('tr').last();
+    this.lastTableRow = page.locator('tr').nth(-1);
     this.firstNameCell = this.lastTableRow.getByRole('cell').nth(0);
     this.lastNameCell = this.lastTableRow.getByRole('cell').nth(1);
     this.postCodeCell = this.lastTableRow.getByRole('cell').nth(2);
@@ -56,6 +56,6 @@ export class CustomersListPage {
   };
 
   async assertNoOtherRowsInSearchResult() {
-    await expect(this.tableRows).not.toHaveCount(2);
+    await expect(this.tableRows).toHaveCount(1);
   }
 }

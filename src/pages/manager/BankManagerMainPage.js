@@ -24,4 +24,6 @@ export class BankManagerMainPage {
   async assertCustomersButtonIsVisible() {
     await expect(this.customersButton).toBeVisible();
   };
+
+
 }
