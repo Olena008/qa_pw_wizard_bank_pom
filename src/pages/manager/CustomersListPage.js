@@ -42,8 +42,9 @@ export class CustomersListPage {
     await expect(customerRow).toHaveCount(0);
   };
 
-  async assertAccountNumberFieldNotEmpty() {
-    await expect(this.accountNumberCell).not.toHaveCount(0);
+  async assertAccountNumberFieldNotEmpty(firstName) {
+    const customerRow = this.page.locator('tr', { hasText: firstName });
+    await expect(customerRow).not.toHaveCount(0);
   };
 
   async search(value) {
@@ -57,5 +58,11 @@ export class CustomersListPage {
 
   async assertNoOtherRowsInSearchResult() {
     await expect(this.tableRows).toHaveCount(1);
+  };
+
+   async deleteCustomer(firstName) {
+    const deleteButton = this.page.getByRole('row', { name: firstName })
+                                  .getByRole('button');
+    await deleteButton.click();
   }
 }
